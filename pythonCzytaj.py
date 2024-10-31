@@ -1,28 +1,31 @@
 import csv
 import os
 
-def sumTimeIfA(path):
+def sum_time_if_a(path):
     Atime = 0
 
     with open(path, "r", newline='') as file:
         reader = csv.reader(file, delimiter=';')
 
         for row in reader:
-            if row[0] == 'A':
+            row_0 = row[0]
+            row_0 = row_0.strip()
+
+            if row_0 == 'A':
                 timeString = row[2]
-                timeString.replace('s', '').strip()
+                timeString = timeString.replace('s', '').strip()
                 Atime += int(timeString)
 
     return Atime
 
 
-def sumATime(path_list):
+def sum_if_a_on_paths(path_list):
     sumTime = 0
 
     for path in path_list:
         if os.path.exists(path):
-            sumTime += sumTimeIfA(path)
+            sumTime += sum_time_if_a(path)
         else:
-            print("Brak ścieżki")
+            print(f"Brak ścieżki: {path}")
 
     return sumTime
